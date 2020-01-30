@@ -79,13 +79,17 @@ const FormikSubmitForm = withFormik({
     };
   },
   validationSchema: Yup.object().shape({
-    name: Yup.string().required("Name is required."),
+    name: Yup.string()
+    .required("Name is required.")
+    .min(2,'Choose a longer name!')
+    .max(50, 'Choose a shorter name!'),
     email: Yup.string()
     .required("Email is required.")
     .email('Email is not valid!'),
     password: Yup.string()
     .required("Password is required.")
     .min(6,'Choose a stronger password!')
+    .max(50, 'Choose a shorter password!')
 }),
   handleSubmit(values, { resetForm, setErrors, setStatus }, ) {
     console.log("submitting", values);
